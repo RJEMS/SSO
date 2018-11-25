@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Home Page{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FriendShipsCreate</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+    .center {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+    }
+    </style>
+</head>
+{% block page_body %}
+
+    <form id="FriendShipsCreate"  method="post" target="">
+            <div class="center">
+                <h3>Description</h3>
+                <p>Returns the 20 most recent direct messages sent to the authenticating user.</p>
+                <h3>Resource URL</h3>
+                <p class="resource-url">https://api.twitter.com/1.1/friendships/create.json</p>
+                <h3>Parameters</h3>
+                <div class="form-group">
+                    <label class="control-label">screen_name <span class="label label-info">optional</span></label>
+                    <input type="text" class="form-control" name="parameters_screen_name" id="screen_name">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">user_id <span class="label label-info">optional</span></label>
+                    <input type="text" class="form-control" name="parameters_user_id" id="user_id">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">follow <span class="label label-info">optional</span></label>
+                    <label for="search:result_type:mixed" ><input type="radio" name="parameters_follow" value="true" id="include_follow:0">true</label>
+                    <label for="search:result_type:recent"><input type="radio" name="parameters_follow" value="true" id="include_follow:1">false</label>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="Validation()">Submit</button>
+
+            </div><!-- /.panel-body -->
+    </form>
+{% endblock %}
+</body>
+</html>
+
+<script>
+function Validation() {
+   $.ajax({
+   type: "POST",
+   url: "/FriendShipsCreateUsingParams",
+   data: $('#FriendShipsCreate').serialize()
+}).done(function( response ) {
+
+     var w = window.open("Results", "popupWindow", "width=600, height=400, scrollbars=yes " );
+     w.document.open();
+     w.document.write(response);
+     w.document.close();
+
+});
+}
+
+</script>

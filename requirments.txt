@@ -1,0 +1,6 @@
+flask
+flask_simplelogin
+oauth2
+functools
+click
+werkzeug
